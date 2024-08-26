@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');// Update this path as necessary
-
+const pg = require("pg")
 // Sync all models with the database
 
 const sequelize = new Sequelize(`${process.env.POSTGRES_URL}`, {
