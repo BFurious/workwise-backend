@@ -5,6 +5,7 @@ const { Sequelize } = require('sequelize');// Update this path as necessary
 const sequelize = new Sequelize(`${process.env.POSTGRES_URL}`, {
     host: 'localhost',
     dialect: 'postgres',
+    dialectModule: pg,
 });
 
 sequelize.authenticate()
