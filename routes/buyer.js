@@ -53,7 +53,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
             return res.status(404).json({ error: 'Cart item not found' });
         }
         await cartItem.destroy();
-        res.json({ message: 'Cart item removed successfully' });
+        res.status(204).json({ message: 'Cart item removed successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -63,7 +63,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
 router.get('/', verifyToken, async (req, res) => {
     try {
         const allProducts = await Product.findAll();
-        res.json(allProducts);
+        res.status(200).json(allProducts);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -74,7 +74,7 @@ router.get('/cart-items', verifyToken, async (req, res) => {
             where: { buyerId: req.user.id},
             include:[{model:Product , as: 'products'}]
         });
-        res.json(cartItems);
+        res.status(200).json(cartItems);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
