@@ -55,13 +55,13 @@ router.delete('/delete/:id', async (req, res) => {
     const { id } = req.params;
     const sellerId = req.user.id; // User ID from the token
     
-    const product = await Cart.findOne({ where: { id, sellerId } });
+    const product = await Product.findOne({ where: { id, sellerId } });
     if (!product) {
       return res.status(404).json({ error: 'Product not found or not owned by seller' });
     }
 
     await product.destroy();
-    res.status(204).end();
+    res.end();
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
